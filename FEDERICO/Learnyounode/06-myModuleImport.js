@@ -1,0 +1,1 @@
+const myModule = require('./06-myModule')
