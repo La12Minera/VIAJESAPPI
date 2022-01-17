@@ -1,6 +1,6 @@
 const { request, response } = require('express')
 const express = require('express')
-const cors = require('cors')
+//const cors = require('cors')
 // const morgan = require('morgan') // Morgan es un logger que recibe unos tipos de estilos para mostrar los look de inform.
 //                Dichos look serian: Ej. POST/api/notes 201 2.595 ms - 95
 const app = express()
@@ -39,7 +39,7 @@ app.use(express.json())  // controlador express.json que tome y convierte los da
 // para poder determinar si fue un error de mi parte o el usuario envio cosas que no eran.
 // No se utiliza tanto en producción por temas de leyes 
 
-app.use(cors())
+//app.use(cors())
 const notes = []
 
 // Home
