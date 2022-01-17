@@ -1,9 +1,0 @@
-1) Se descarga de forma global el paquete de nodeschool.io // npm i -g learnyounode // En cmder
-2) Cada vez que quiero ver los ejercicios // learnyounode // En cmder
-
-Sincrono: Se refiere a un bloque, es decir que hasta que no se complete esa operación, no seguira con el resto del código. Toda operación síncrona (o de bloqueo) del sistema de archivos en el módulo fs tiene sufijo 'Sync'. Para leer un archivo debes usar fs.readFileSync('/path/to/file'). Éste devuelve un objeto Buffer con los contenidos del archivo.
-Buffer: Representación de lo que hay en la memoria RAM a traves de números
-fs.readFile: Lee el contenido de un archivo de nodejs (Lee el contenido de un archivo que esta en determinada ruta)
-split: Me va a separar una cadena (string) de acuerdo a lo que pase de como quiero que la separe. Ej.
-const str = 'hola \n fede\nhola  adrian'  // \n : salto de linea
-str.split('hola') // ['hola ', ' fede', 'hola adrian']
