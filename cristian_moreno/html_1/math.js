@@ -1,7 +1,0 @@
-
-
-suma()
-
-division()
-
-convertirAEntero()
