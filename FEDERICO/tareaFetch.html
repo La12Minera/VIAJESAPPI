@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+    </ul>
+    <script>
+    (async () => {
+
+        const resp = await fetch('https://phone-agenda-dany0913.herokuapp.com/api/persons/all')
+        const users = await resp.json()
+
+        const ul = document.querySelector('ul')
+
+        const listUsers = users.map(user => {
+            const li = document.createElement('li')
+            const p = document.createElement('p')
+            const h2 = document.createElement('h2')
+
+            h2.appendChild(document.createTextNode(user.userName))
+            p. appendChild(document.createTextNode(user.number))
+
+            // li.appendChild(h2)
+            // li.appendChild(p)
+
+            li.append(h2, p)
+            return li
+        });
+
+        ul.append(...listUsers)
+    })()
+    </script>
+</body>
+</html>
