@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        El div
+        <h2 id="h2">
+            H2 -- -- --
+            <span id="span">
+                **** SPAN
+            </span>
+        </h2>
+    </div>
+
+    <script>
+
+        const div = document.querySelector('#div1')
+        const h2 = document.querySelector('#h2')
+        const span = document.querySelector('#span')
+        
+        const action = evt => {
+            evt.stopPropagation()
+            console.log(`Evento generado en >> ${evt.currentTarget.nodeName}`)
+        }
+
+        span.addEventListener('click', action)
+        h2.addEventListener('click', action)        
+
+    </script>
+    
+</body>
+</html>
