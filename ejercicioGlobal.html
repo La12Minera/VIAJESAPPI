@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJERCICIO DOM</title>
+</head>
+<body>
+    <header>
+        <h1 class="title">BANDWIDTH</h1>
+    </header>
+    <hr />
+    <button class="btn-ocultar">ocultar información</button>
+    <button class="btn-mostrar" style="display: none">mostrar información</button>
+    <hr>
+    <form class="form" style="display: none">
+        <p>Nombre<input type="text" id="nombre" name="nombre" size="50"></p>
+        <p>Apellido<input type="text" id="apellido" name="apellido" size="50"></p>
+        <p>Acerca de<input type="text" id="sobre" name="sobre" size="50"></p>
+        <input type="submit" value="Guardar">
+    </form>
+    <section class="section-list">
+        <hr />
+    </section>
+    <script>
+        const section = document.querySelector('.section-list')
+        const mostrar = document.querySelector('.btn-mostrar')
+        const ocultar = document.querySelector('.btn-ocultar')
+        const formulario = document.querySelector('.form')
+        const link = "https://shrouded-headland-67003.herokuapp.com/api/persons"
+
+        const getUsers = async() => {
+            try {
+                const resp = await fetch(link)
+                const data = await resp.json()
+                data.forEach(user=>{
+                    displayUser(user)
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getUsers()
+
+        const postUsers = async(post) => {
+            try {
+                const options = {
+                    method: "POST",
+                    headers: {
+                        'content-type':'aplication/json'
+                    },
+                    body: JSON.stringify(post) 
+                }
+                const resp = await fetch(`${link}`, options)
+                const result = await resp.json()
+                console.log(result);
+            } catch (error) {
+                console.log(error); 
+            }
+        }
+
+        const displayUser=(user=>{
+            const name = user.name
+            const about = user.number
+
+            const div = document.createElement('div')
+            const h2 = document.createElement('h2')
+            h2.setAttribute('class', 'name')
+            const p = document.createElement('p')
+            p.setAttribute('class', 'description')
+            const hr = document.createElement('hr')
+
+            h2.appendChild(document.createTextNode(`${name}`))
+            p.appendChild(document.createTextNode(about))
+
+            div.append(h2, p)
+            section.append(div, hr)
+        })
+
+        const fnBtnHide = (evt) => {
+            ocultar.style.display = 'none'
+            section.style.display = 'none'
+            mostrar.style.display = ''
+            formulario.style.display = ''
+        }
+
+        const fnBtnShow = (evt) => {
+            ocultar.style.display = ''
+            section.style.display = ''
+            mostrar.style.display = 'none'
+            formulario.style.display = 'none'
+        }
+
+        const submitHandler = (evt) => {
+            const name = document.getElementById('nombre').value
+            const lastName = document.getElementById('apellido').value
+            const about = document.getElementById('sobre').value
+
+        if(!name || !lastName || !about){
+            alert('Completa toda la información')
+        }else{
+            const user = {
+                "name":{
+                    "first":name,
+                    "last":lastName
+                },
+                "about":about,
+                "isActive":true
+            }
+            alert(`la persona de nombre ${name} ${lastName} se ha añadido correctamente`)
+            displayUser(user)
+        }
+        evt.preventDefault()
+        }
+
+        ocultar.addEventListener('click', fnBtnHide)
+        mostrar.addEventListener('click', fnBtnShow)
+        formulario.addEventListener('submit', submitHandler)
+    </script>
+</body>
+</html>
