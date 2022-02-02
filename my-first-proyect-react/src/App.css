@@ -1,3 +1,9 @@
 .container {
   background-color: blueviolet;
 }
+
+.star {
+  height: 30px;
+  width: 30px;
+  border: 1px solid red;
+}
