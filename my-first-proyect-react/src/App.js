@@ -1,41 +1,30 @@
-/* import reactDom from "react-dom"; */
-import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Header from "./Components/Header";
-import Body from "./Components/Body";
-import Total from "./Components/Total";
+import Home from "./Components/Pages/Home";
+import About from "./Components/Pages/About";
+import Detail from "./Components/Pages/Detail";
+import Profile from "./Components/Pages/Profile";
 
-const course = "Half stack application";
-const part1 = "Fundamentals of react";
-const exercise1 = 10;
-const part2 = "Using props to pass data";
-const exercise2 = 7;
-const part3 = "States of a component";
-const exercise3 = 14;
-const totalExercises = exercise1 + exercise2 + exercise3;
-
-const content = [
-  {
-    title: part1,
-    exercise: exercise1,
-  },
-  {
-    title: part2,
-    exercise: exercise2,
-  },
-  {
-    title: part3,
-    exercise: exercise3,
-  },
-];
+import Navbar from "./Components/Navbar";
 
 function App() {
+  console.log(1);
+
   return (
-    <div className="App">
-      <Header course={course} />
-      <Body content={content} />
-      <Total totalExercises={totalExercises} />
-    </div>
+    <BrowserRouter>
+      <Navbar />
+
+      <Switch>
+        <Route path="/" component={Home} exact />
+        <Route path="/about" component={About} exact />
+        <Route path="/profile" exact>
+          <Profile />
+        </Route>
+        <Route path="/profile/:id" component={Detail} exact />
+      </Switch>
+
+      <footer>Esto es el footer</footer>
+    </BrowserRouter>
   );
 }
 
