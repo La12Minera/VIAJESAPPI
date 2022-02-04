@@ -20,7 +20,7 @@ function App() {
         <Route path="/profile" exact>
           <Profile />
         </Route>
-        <Route path="/profile/:id" component={Detail} exact />
+        <Route path="/profile/:name" component={Detail} exact />
       </Switch>
 
       <footer>Esto es el footer</footer>
