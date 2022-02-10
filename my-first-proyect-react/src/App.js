@@ -1,30 +1,18 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+/* eslint-disable */
 
-import Home from "./Components/Pages/Home";
-import About from "./Components/Pages/About";
-import Detail from "./Components/Pages/Detail";
-import Profile from "./Components/Pages/Profile";
+import React, { useState } from "react";
 
-import Navbar from "./Components/Navbar";
+import Page1 from "./Components/Page1";
+import Page2 from "./Components/Page2";
+
+import { DataProvider } from "./Context/DataContext";
 
 function App() {
-  console.log(1);
-
   return (
-    <BrowserRouter>
-      <Navbar />
-
-      <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/about" component={About} exact />
-        <Route path="/profile" exact>
-          <Profile />
-        </Route>
-        <Route path="/profile/:name" component={Detail} exact />
-      </Switch>
-
-      <footer>Esto es el footer</footer>
-    </BrowserRouter>
+    <DataProvider>
+      <Page1 />
+      <Page2 />
+    </DataProvider>
   );
 }
 
