@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 
 const server =
-  process.env.MONGO_DB_SERVER ||
-  "Rogerfederer1234:Rogerfeder1234@cursos.u3uyo.mongodb.net";
-const database = process.env.MONGO_DB_DATABASE || "agenda";
+  process.env.MONGO_DB_SERVER
+const database = process.env.MONGO_DB_DATABASE
 
 // 1- Nos conectamos a una base de datos
 const connectDB = async () => {

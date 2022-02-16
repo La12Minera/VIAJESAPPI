@@ -11,7 +11,7 @@ const Post = require("./post.model");
 // Lista a todos
 async function index(_, res) {
   try {
-    const posts = await Post.find().exec();
+    const posts = await Post.find().sort({createdAt: -1}).exec();  // sort: Ordenar por.... (-1 descendente, 1 ascendente)
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).send(error);
@@ -19,38 +19,59 @@ async function index(_, res) {
 }
 
 // Lista a uno
-async function show(id) {
+async function show(req, res) {
+  const {id} = req.params  // Va a buscar los params
   try {
     const post = await Post.findById(id).exec();
-    return post;
-  } catch (error) {}
+    if(post) {
+    res.status(200).json(post);
+    } else {
+    res.status(404).json({message: 'Not Found my pez'});
+    }
+
+  } catch (error) {
+    res.status(500).send(error);
+  }
 }
 
 // Crea
-async function create(post) {
+async function create(req, res) {
+  const {title, content, tags} = req.body
   try {
-    const post = new Post(post);
+    const post = new Post({title, content, tags});
     await post.save();
-    return post;
-  } catch (error) {}
+    res.status(201).json(post);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 }
 
 // Elimina
-async function destroy(id) {
+async function destroy(req, res) {
+  const {id} = req.params
   try {
     const post = await Post.findByIdAndDelete(id).exec();
-    return post;
-  } catch (error) {}
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
 }
 
 // Actualizar
-async function update(post) {
+async function update(req, res) {
+  const {id} = req.params
+  const postToUpdate = req.body
+
   try {
-    const post = await Post.findByIdAndUpdate({ _id: id }, post, {
-      new: true,
+    const post = await Post.findByIdAndUpdate({ _id: id }, postToUpdate, {
+      new: true
     }).exec();
-    return post;
-  } catch (error) {}
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
 }
 
 module.exports = {
