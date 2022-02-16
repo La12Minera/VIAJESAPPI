@@ -26,7 +26,20 @@ const connectDB = async () => {
   await connectDB();
 
   // 2- Creamos un esquema
-  const PostSchema = mongoose.Schema({}, { timestamps: true });
+  const PostSchema = mongoose.Schema(
+    {
+      title: {},
+      content: String,
+      tags: [
+        {
+          type: String,
+          uppercase: true,
+          trim: true,
+        },
+      ],
+    },
+    { timestamps: true }
+  );
 
   const Post = mongoose.model("Post", PostSchema);
 
